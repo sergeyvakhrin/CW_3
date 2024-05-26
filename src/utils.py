@@ -17,7 +17,8 @@ def load_data(path: Path):
         print("Отсутствуют данные")
         return {}
 
-def get_instances_executed(operations_list):
+
+def get_instances_executed(operations_list) -> list:
     """
     получаем список экземпляров классов успешных операций
     """
