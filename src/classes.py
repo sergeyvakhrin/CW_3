@@ -16,8 +16,10 @@ class Operation:
                 f'{self.hide_number_from()}{self.hide_number_to()}\n'
                 f'{self.amount} {self.currency_name}')
 
-    # def __repr__(self):
-    #     pass
+    def __repr__(self):
+        return (f'{self.change_date_format()} {self.description}\n'
+                f'{self.hide_number_from()}{self.hide_number_to()}\n'
+                f'{self.amount} {self.currency_name}')
 
     def __lt__(self, other):
         return self.date < other.date
@@ -38,7 +40,7 @@ class Operation:
         """
         if self.from_ != "":
             hide_from = self.from_.split(" ")
-            hide_from[-1] = f'{hide_from[-1][:4]} {hide_from[-1][5:7]}** **** {hide_from[-1][-4:]} -> '
+            hide_from[-1] = f'{hide_from[-1][:4]} {hide_from[-1][4:6]}** **** {hide_from[-1][-4:]} -> '
             return " ".join(hide_from)
         else:
             return ""

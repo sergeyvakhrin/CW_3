@@ -33,10 +33,10 @@ def get_instances_executed(operations_list):
                 from_=operation.get("from") if operation.get("from") is not None else "",
                 to=operation["to"]
             )
-            # добавляем экземпляр класса в список
-            instances_list.append(operation)
         else:
             continue
+        # добавляем экземпляр класса в список
+        instances_list.append(operation)
     return instances_list
 
 
