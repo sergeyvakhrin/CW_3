@@ -1,4 +1,5 @@
 import json
+import os.path
 from pathlib import Path
 
 from config import RESULT_OPERATOINS
@@ -9,11 +10,12 @@ def load_data(path: Path):
     """
     загрузка данных из файла
     """
-
-    ###!!!! Добавить проверку наличия файла
-    with open(path, "rt", encoding="UTF-8") as file:
-        return json.load(file)
-
+    if os.path.exists(path):
+        with open(path, "rt", encoding="UTF-8") as file:
+            return json.load(file)
+    else:
+        print("Отсутствуют данные")
+        return {}
 
 def get_instances_executed(operations_list):
     """
@@ -36,6 +38,7 @@ def get_instances_executed(operations_list):
         else:
             continue
     return instances_list
+
 
 def sorted_instances(instances_list_to_sort):
     """

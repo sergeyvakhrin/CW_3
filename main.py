@@ -12,7 +12,7 @@ def main():
     # сортируем список экземпляров классов по дате
     sorted_operations = sorted_instances(executed_operations)
 
-    # получение списка последних успешных операций
+    # получение списка определенного кол-ва последних успешных операций
     quantity_operations = sorted_operations[:QUANTITY_OPERATIONS]
 
     # вывод последних успешных операций

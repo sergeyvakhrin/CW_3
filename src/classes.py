@@ -1,5 +1,6 @@
 from datetime import datetime
 
+
 class Operation:
 
     def __init__(self, date: str, amount: str, currency_name: str, description: str, from_: str, to: str):
