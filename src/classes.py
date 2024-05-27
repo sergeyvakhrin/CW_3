@@ -40,8 +40,13 @@ class Operation:
         """
         if self.from_ != "":
             hide_from = self.from_.split(" ")
-            hide_from[-1] = f'{hide_from[-1][:4]} {hide_from[-1][4:6]}** **** {hide_from[-1][-4:]} -> '
-            return " ".join(hide_from)
+            if hide_from[0] == "Счет":
+                hide_from = self.from_.split(" ")
+                hide_from[-1] = f'**{hide_from[-1][-4:]} -> '
+                return " ".join(hide_from)
+            elif hide_from[0] != "Счет":
+                hide_from[-1] = f'{hide_from[-1][:4]} {hide_from[-1][4:6]}** **** {hide_from[-1][-4:]} -> '
+                return " ".join(hide_from)
         else:
             return ""
 
