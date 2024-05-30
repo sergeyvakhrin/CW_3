@@ -10,6 +10,8 @@ def test_load_data():
 def test_get_instances_executed(operations):
     assert get_instances_executed(test_list_dict1) == []
     assert get_instances_executed(test_list_dict2) == []
+    # assert isinstance(get_instances_executed(operations), list)
+    # assert len(get_instances_executed(operations)) == 3
 
 
 def test_sorted_instances(operations):
