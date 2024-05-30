@@ -13,12 +13,12 @@ class Operation:
 
     def __str__(self):
         return (f'{self.change_date_format()} {self.description}\n'
-                f'{self.hide_number_from()}{self.hide_number_to()}\n'
+                f'{self.hide_number(self.from_)}{self.deliter()}{self.hide_number(self.to)}\n'
                 f'{self.amount} {self.currency_name}')
 
     def __repr__(self):
         return (f'{self.change_date_format()} {self.description}\n'
-                f'{self.hide_number_from()}{self.hide_number_to()}\n'
+                f'{self.hide_number(self.from_)}{self.deliter()}{self.hide_number(self.to)}\n'
                 f'{self.amount} {self.currency_name}')
 
     def __lt__(self, other):
@@ -34,26 +34,26 @@ class Operation:
         the_date = datetime.fromisoformat(self.date)
         return the_date.strftime("%d.%m.%Y")
 
-    def hide_number_from(self):
+    def hide_number(self, account_number: str) -> str:
         """
-        скрытие номера счета списания
+        скрытие номера счета
         """
-        if self.from_ != "":
-            hide_from = self.from_.split(" ")
-            if hide_from[0] == "Счет":
-                hide_from = self.from_.split(" ")
-                hide_from[-1] = f'**{hide_from[-1][-4:]} -> '
-                return " ".join(hide_from)
-            elif hide_from[0] != "Счет":
-                hide_from[-1] = f'{hide_from[-1][:4]} {hide_from[-1][4:6]}** **** {hide_from[-1][-4:]} -> '
-                return " ".join(hide_from)
+        if account_number != "":
+            account_type: list[str] = account_number.split(" ")
+            number: str = account_type[-1]
+
+            if account_type[0] == "Счет":
+                hide_number: str = f'**{number[-4:]}'
+            if account_type[0] != "Счет":
+                hide_number: str = f'{number[:4]} {number[4:6]}** **** {number[-4:]}'
+
+            account_type[-1] = hide_number
+            return " ".join(account_type)
         else:
             return ""
 
-    def hide_number_to(self):
-        """
-        скрытие номера счета зачисления
-        """
-        hide_to = self.to.split(" ")
-        hide_to[-1] = f'**{hide_to[-1][-4:]}'
-        return " ".join(hide_to)
+    def deliter(self):
+        if self.from_:
+            return f' -> '
+        else:
+            return f''
